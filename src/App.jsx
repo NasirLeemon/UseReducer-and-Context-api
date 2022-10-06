@@ -1,43 +1,26 @@
 
+import { useContext } from 'react';
 import {useReducer } from 'react'
 import './App.css'
+import { DataContext } from './context/DataContext';
+import Profile from './Profile';
 
 
-const countReducer = (state, action) => {
-    // console.log(state, action);
-    if (action.type === 'INCREMENT'){
-      return state + 1 
-    } else if ( action.type === 'DECREMENT'){
-      return state - 1
-    } else if (action.type === 'RESET') {
-      return 0
-    }
-}
 
 function App() {
  
 // const [count, setCount] = useState(0)
-const [state, dispatch] = useReducer(countReducer, 0)
 
-const handleIncrement = () => {
-  dispatch({type : 'INCREMENT'})
-}
-
-const handleDecrement = () => {
-  dispatch({type : 'DECREMENT'})
-}
-
-const handleReset = () => {
-  dispatch({type : 'RESET'})
-}
-
+const context = useContext(DataContext)
+console.log(context);
 
   return (
     <div className="App">
-    <h2>Count: {state} </h2>
-    <button onClick={handleIncrement}>Increment</button>
-    <button onClick={handleDecrement}>Decrement</button>
-    <button onClick={handleReset}>Reset</button>
+    <h2>Count: {context.state} </h2>
+    <button onClick={context.handleIncrement}>Increment</button>
+    <button onClick={context.handleDecrement}>Decrement</button>
+    <button onClick={context.handleReset}>Reset</button>
+    <Profile />
     </div>
   )
 }
